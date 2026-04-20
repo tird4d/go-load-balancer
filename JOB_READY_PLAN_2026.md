@@ -221,14 +221,14 @@
 **New concepts:** `net.Listen`, `net.Dial`, goroutines, `io.Copy`, `defer`
 
 - [ ] Read: Go Tour — Goroutines + Channels section (1h)
-- [ ] Read: `net` package docs — `Listen`, `Accept`, `Dial` (1h)
-- [ ] Write a bare `main.go` that listens on `:8080` and prints each connection (2h)
-- [ ] Forward the connection to a single hardcoded backend with `net.Dial` (2h)
-- [ ] Copy data both ways using two goroutines + `io.Copy` (3h)
-- [ ] Handle connection close correctly — understand why you need both directions (2h)
-- [ ] Test manually: `curl` through proxy to a `python3 -m http.server` backend (1h)
-- [ ] Add basic logging (`log` package — no libraries yet) (1h)
-- [ ] Write down in comments: why does each connection need its own goroutine? (1h)
+- [x] Read: `net` package docs — `Listen`, `Accept`, `Dial` (1h)
+- [x] Write a bare `main.go` that listens on `:8080` and prints each connection (2h)
+- [x] Forward the connection to a single hardcoded backend with `net.Dial` (2h)
+- [x] Copy data both ways using two goroutines + `io.Copy` (3h)
+- [x] Handle connection close correctly — understand why you need both directions (2h)
+- [x] Test manually: `curl` through proxy to a `python3 -m http.server` backend (1h)
+- [x] Add basic logging (`log` package — no libraries yet) (1h)
+- [x] Answer review question: explain why each connection needs its own goroutine (1h)
 
 **Checkpoint:** `curl localhost:8080` proxies to backend. You can explain goroutine-per-connection.
 
