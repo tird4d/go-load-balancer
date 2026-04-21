@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"sync"
 )
 
 // func handleConnection(conn net.Conn) {
@@ -50,19 +51,22 @@ func proxyConnection(clientConn net.Conn) {
 	fmt.Println("Server Connection accepted", serverConn.RemoteAddr())
 	defer serverConn.Close()
 
+	var wg sync.WaitGroup
+	wg.Add(2)
 	go func(){
+		defer wg.Done()
 		tee := io.TeeReader(serverConn, os.Stdout)
 		io.Copy(clientConn, tee)
 
 	}()
 	
-	tee := io.TeeReader(clientConn, os.Stdout)
-	io.Copy(serverConn, tee)
+	go func(){
+		defer wg.Done()
+		tee := io.TeeReader(clientConn, os.Stdout)
+		io.Copy(serverConn, tee)
+	}()
 
-
-
-
-
+	wg.Wait()
 
 }
 
