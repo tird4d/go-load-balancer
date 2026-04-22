@@ -1,4 +1,4 @@
-package main
+package proxy
 
 import (
 	"fmt"
@@ -38,13 +38,11 @@ import (
 
 // }
 
-
-
 func proxyConnection(clientConn net.Conn) {
 	defer clientConn.Close()
 	serverConn, err := net.Dial("tcp", ":2001")
 
-	if err!=nil{
+	if err != nil {
 		fmt.Println("Server connection problem", err)
 		return
 	}
@@ -53,14 +51,14 @@ func proxyConnection(clientConn net.Conn) {
 
 	var wg sync.WaitGroup
 	wg.Add(2)
-	go func(){
+	go func() {
 		defer wg.Done()
 		tee := io.TeeReader(serverConn, os.Stdout)
 		io.Copy(clientConn, tee)
 
 	}()
-	
-	go func(){
+
+	go func() {
 		defer wg.Done()
 		tee := io.TeeReader(clientConn, os.Stdout)
 		io.Copy(serverConn, tee)
@@ -70,7 +68,7 @@ func proxyConnection(clientConn net.Conn) {
 
 }
 
-func main() {
+func ConnectionHandler() {
 
 	address := ":2000"
 
@@ -100,7 +98,5 @@ func main() {
 		// go serverConnection(conn,  serverChan)
 
 	}
-
-
 
 }
