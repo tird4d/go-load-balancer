@@ -238,15 +238,15 @@
 **Goal:** Speak HTTP properly — rewrite headers, preserve host, handle errors.  
 **New concepts:** `net/http`, `http.Handler`, `httputil.ReverseProxy`, request/response lifecycle
 
-- [ ] Read: `net/http` package — Handler, ServeMux, ResponseWriter (2h)
-- [ ] Read: `httputil.ReverseProxy` source code on pkg.go.dev (1h)
-- [ ] Rewrite TCP proxy as an HTTP proxy using `http.ListenAndServe` (3h)
-- [ ] Add `X-Forwarded-For` header injection manually (1h)
-- [ ] Strip hop-by-hop headers (`Connection`, `Keep-Alive`, `Upgrade`) (2h)
-- [ ] Handle non-2xx responses from backend gracefully (2h)
-- [ ] Add request timeout using `http.Client` with custom transport (2h)
-- [ ] Test with a real Go backend server you write yourself (2h)
-- [ ] Write a test using `net/http/httptest` (3h)
+- [x] Read: `net/http` package — Handler, ServeMux, ResponseWriter (2h)
+- [x] Read: `httputil.ReverseProxy` source code on pkg.go.dev (1h)
+- [x] Rewrite TCP proxy as an HTTP proxy using `http.ListenAndServe` (3h)
+- [x] Add `X-Forwarded-For` header injection manually (1h)
+- [x] Strip hop-by-hop headers (`Connection`, `Keep-Alive`, `Upgrade`) (2h)
+- [x] Handle non-2xx responses from backend gracefully (2h)
+- [x] Add request timeout using `http.Client` with custom transport (2h)
+- [x] Test with a real Go backend server you write yourself (2h)
+- [x] Write a test using `net/http/httptest` (3h)
 
 **Checkpoint:** HTTP proxy works, headers are correct, has a passing test.
 
@@ -430,7 +430,7 @@ go-load-balancer/
 
 #### ✅ Milestone Checklist
 - [ ] Week 1: TCP proxy working manually tested
-- [ ] Week 2: HTTP proxy with passing test
+- [x] Week 2: HTTP proxy with passing test
 - [ ] Week 3: All 3 algorithms benchmarked
 - [ ] Week 4: Health checker stops dead backends automatically
 - [ ] Week 5: Graceful shutdown + rate limiter with 429

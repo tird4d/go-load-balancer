@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+var backendURL = "http://localhost:2000"
+
 var client = &http.Client{
 	Timeout: 10 * time.Second,
 	Transport: &http.Transport{
@@ -19,11 +21,23 @@ var client = &http.Client{
 	},
 }
 
+var hopByHope = map[string]bool{
+	"Connection":          true,
+    "Keep-Alive":          true,
+    "Transfer-Encoding":   true,
+    "Upgrade":             true,
+    "Proxy-Authorization": true,
+    "Proxy-Authenticate":  true,
+    "Te":                  true,
+    "Trailers":            true,
+	"X-Dangerous-Header":	true,
+}
+
+
+
 func proxy(w http.ResponseWriter, req *http.Request) {
 
-	server := "http://localhost:2000"
-
-	serverReq, err := http.NewRequest(req.Method, server+req.RequestURI, nil)
+	serverReq, err := http.NewRequest(req.Method, backendURL+req.RequestURI, nil)
 	if err != nil {
 		fmt.Println("url error")
 	}
@@ -31,7 +45,7 @@ func proxy(w http.ResponseWriter, req *http.Request) {
 
 	for i, v := range req.Header {
 		fmt.Println(i, strings.Join(v, ","))
-		if i == "X-Dangerous-Header" {
+		if hopByHope[i] {
 			continue
 		}
 
@@ -55,7 +69,6 @@ func proxy(w http.ResponseWriter, req *http.Request) {
 
 	}
 	w.Header().Set("X-Proxy", "Cached")
-	w.Header()
 	w.WriteHeader(serverRes.StatusCode)
 	io.Copy(w, serverRes.Body)
 }
